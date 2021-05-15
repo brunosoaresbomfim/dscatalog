@@ -33,13 +33,10 @@ public class Product implements Serializable {
 	@Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
 	private Instant date;
 
-	//JoinColumn pega da proprio classe
-	//InverseJoinColumns pega o tipo que tiver na SET<>
+	// JoinColumn pega da proprio classe
+	// InverseJoinColumns pega o tipo que tiver na SET<>
 	@ManyToMany
-	@JoinTable(name = "tb_product_category",
-		joinColumns = @JoinColumn(name = "product_id"),
-		inverseJoinColumns = @JoinColumn(name = "category_id")
-			)
+	@JoinTable(name = "tb_product_category", joinColumns = @JoinColumn(name = "product_id"), inverseJoinColumns = @JoinColumn(name = "category_id"))
 	private Set<Category> categories = new HashSet<>();
 
 	public Product() {
@@ -99,6 +96,14 @@ public class Product implements Serializable {
 
 	public Instant getDate() {
 		return date;
+	}
+
+	public void setCategories(Set<Category> categories) {
+		this.categories = categories;
+	}
+
+	public void setDate(Instant date) {
+		this.date = date;
 	}
 
 	public Set<Category> getCategories() {
